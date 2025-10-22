@@ -29,5 +29,39 @@ public class ParcialApplication {
 			}
 		}
 		
+		Map<String, Object> resultadoJSON = new HashMap<>();
+		resultadoJSON.put("operation", "obtenPrimos");
+		resultadoJSON.put("input", x);
+		resultadoJSON.put("output", primos);
+		return ResponseEntity.ok(resultadoJSON);
 	}
+
+	private boolean esPrimo(int numero) {
+		if (numero <= 1) return false; 
+		for (int i = 2; i < numero; i++) {
+			if (numero % i == 0) {
+				return false; 
+			}
+		}
+		return true;
+    }
+
+	@GetMapping("/factores")
+	public ResponseEntity<Map<String, Object>> obtenFactores(@RequestParam(name = "x") int x){
+		List<Integer> factores = new ArrayList<>();
+		for (int i = 1; i <= x; i++) {
+			if (x % i == 0) {
+				factores.add(i);
+			}
+		}
+
+		Map<String, Object> resultadoJSON = new HashMap<>();
+		resultadoJSON.put("operation", "obtenFactores");
+		resultadoJSON.put("input", x);
+		resultadoJSON.put("output", factores);
+		return ResponseEntity.ok(resultadoJSON);
+	}
+
+
+	
 }
